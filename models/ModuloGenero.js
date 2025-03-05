@@ -23,7 +23,7 @@ const ModuloGeneroSchema = Schema ({
     },
     descripcion:{
         type: String,
-        required: true
+        required: false
     }
 
 });

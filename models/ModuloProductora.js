@@ -29,7 +29,7 @@ const ModuloProductoraSchema = Schema ({
     
     descripcion:{
         type: String,
-        required: true
+        required: false
     }
 
 });

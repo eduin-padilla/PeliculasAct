@@ -35,12 +35,12 @@ const ModuloMediaSchema = Schema({
         type: Number,
         required: true
     },
+    
     genero: {
         type: Schema.Types.ObjectId,
         ref: 'Genero',
         required: true,
-
-    // otros modulos 
+    
     },
     director: {
         type: Schema.Types.ObjectId,

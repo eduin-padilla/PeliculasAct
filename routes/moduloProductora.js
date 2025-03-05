@@ -10,6 +10,7 @@ router.post('/',
     [
         check('nombre', 'nombre es requerido').not().isEmpty(),
         check('estado', 'estado es requerido').isIn(['activo', 'inactivo']),
+        check('slogan', 'slogan es requerido').not().isEmpty(),
 
     ],
 
@@ -48,7 +49,7 @@ router.put('/moduloProductoraId',
     [
         check('nombre', 'nombre es requerido').not().isEmpty(),
         check('estado', 'estado es requerido').isIn(['activo', 'inactivo']),
-
+        check('slogan', 'slogan es requerido').not().isEmpty()
     ],
 
     async function (req, res) {

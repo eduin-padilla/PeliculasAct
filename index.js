@@ -13,7 +13,7 @@ app.use('/moduloDirector', require('./routes/moduloDirector'));
 app.use('/moduloGenero', require('./routes/moduloGenero'));
 app.use('/moduloTipo', require('./routes/moduloTipo'));
 app.use('/moduloProductora', require('./routes/moduloProductora'))
-
+app.use('/moduloMedia', require('./routes/moduloMedia'));
 
 app.listen(port, () =>{
     console.log(`example app listening on port ${port}`)
