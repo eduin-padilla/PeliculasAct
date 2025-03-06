@@ -137,7 +137,6 @@ router.get('/:moduloMediaId', async function (req, res) {
 });
 
 //DELETE
-
 router.delete('/:moduloMediaId', async function (req, res) {
     try {
         const media = await ModuloMedia.findByIdAndDelete(req.params.moduloMediaId);

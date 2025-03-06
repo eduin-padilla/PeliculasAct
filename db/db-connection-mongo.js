@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const getConnection = async () => {  // ✅ Nombre corregido
+const getConnection = async () => {  
     try {
         const url = 'mongodb+srv://eduin_padilla:edwinpa1015m@apppeliculas.3vdbm.mongodb.net/appweb?retryWrites=true&w=majority&appName=AppPeliculas';
 

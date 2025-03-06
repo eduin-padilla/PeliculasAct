@@ -86,7 +86,6 @@ router.get('/', async function (req, res) {
 });
 
 //DELETE
-
 router.delete('/', async function (req, res) {
     try {
         const { nombre } = req.body; // Se recibe el nombre desde el body
