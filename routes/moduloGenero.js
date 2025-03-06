@@ -1,5 +1,5 @@
 //Get
-const { Router } = require ('express');
+const { Router } = require('express');
 const { validationResult, check } = require('express-validator');
 const ModuloGenero = require('../models/ModuloGenero');
 
@@ -10,8 +10,7 @@ router.post('/',
     [
         check('nombre', 'nombre es requerido').not().isEmpty(),
         check('estado', 'estado es requerido').isIn(['activo', 'inactivo']),
-        
-        
+
     ],
 
     async function(req, res){
@@ -40,39 +39,41 @@ router.post('/',
 });
 
 //PUT
-router.put('/moduloGeneroId',
 
+router.put('/:moduloGeneroId',
     [
-        check('nombre', 'nombre es requerido').not().isEmpty(),
-        check('estado', 'estado es requerido').isIn(['activo', 'inactivo']),
-
+        check('nombre', 'nombre.requerido').not().isEmpty(),
+        check('estado', 'estado.requerido').isIn(['activo', 'inactivo'])
     ],
+    async function(req, res) {
+        try {
+            let moduloGenero = await ModuloGenero.findById(req.params.moduloGeneroId);
 
-    async function(req, res){
-        try{
-            let moduloGenero = await ModuloGenero.fyndById(req.params.moduloGeneroId);
-            if(!moduloGenero){
-                return res.send('no existe este genero');
+            if (!moduloGenero) {
+                return res.status(404).send('Género no encontrado');
             }
+
             const errors = validationResult(req);
-            if(!errors.isEmpty()){
-                return res.status(400).json({ message: errors.array() })
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ message: errors.array() });
             }
 
             moduloGenero.nombre = req.body.nombre;
             moduloGenero.estado = req.body.estado;
-            moduloGenero.fechaCreacion = new Date();
             moduloGenero.fechaActualizacion = new Date();
             moduloGenero.descripcion = req.body.descripcion;
-            moduloGenero = await  moduloGenero.save();
+            moduloGenero = await moduloGenero.save();
+
             res.send(moduloGenero);
-        
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Ha ocurrido un error');
         }
-        catch(error){
-            console.log(error);
-            res.status(500).send('ocurrio un error')
-        }
-});
+    }
+);
+
+module.exports = router;
+
 
 //GET
 router.get('/', async function (req, res) {

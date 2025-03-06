@@ -16,7 +16,7 @@ router.post('/',
 
         try{
             const errors = validationResult(req);
-            if(!erros.isEmpty()){
+            if(!errors.isEmpty()){
                 return res.status(400).json({messaje : errors.array})
             }
 
@@ -41,43 +41,38 @@ router.post('/',
 );
 
 //PUT
-router.put('/moduloTipoID',
+router.put('/:moduloTipoId',
     [
-        check ('nombre', 'nombre.requerido').not().isEmpty(),
-
+        check('nombre', 'nombre.requerido').not().isEmpty()
     ],
+    async function(req, res) {
+        try {
+            let moduloTipo = await ModuloTipo.findById(req.params.moduloTipoId);
 
-    async function (req, res) {
-
-        try{
-            
-            let  moduloTipo = new ModuloTipo.findById(req.params.ModuloTipoId)
-
-            if(!moduloTipo){
-                return res.send('no esxiste este tipo')
+            if (!moduloTipo) {
+                return res.status(404).send('Módulo Tipo no existe');
             }
 
             const errors = validationResult(req);
-            if(!errors.isEmpty){
-                return res.status(400).json({message : erros.array})
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ message: errors.array() });
             }
 
             moduloTipo.nombre = req.body.nombre;
             moduloTipo.fechaActualizacion = new Date();
             moduloTipo.descripcion = req.body.descripcion;
-
             moduloTipo = await moduloTipo.save();
-
+            
             res.send(moduloTipo);
-        }
-        catch(error){
-            console.log(error);
-            res.status(500).send('ocurrio un error')
-        }
 
-        
-    
-});
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Ha ocurrido un error');
+        }
+    }
+);
+
+
 
 //GET
 router.get('/', async function (req, res) {

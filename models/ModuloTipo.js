@@ -16,7 +16,7 @@ const ModuloTipoSchema = Schema ({
     },
     descripcion:{
         type: String,
-        required: true
+        required: false
     }
 
 });

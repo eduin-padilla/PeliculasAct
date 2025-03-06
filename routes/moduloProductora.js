@@ -44,42 +44,41 @@ router.post('/',
 
 
 //PUT
-router.put('/moduloProductoraId',
-
+router.put('/:moduloProductoraId',
     [
-        check('nombre', 'nombre es requerido').not().isEmpty(),
-        check('estado', 'estado es requerido').isIn(['activo', 'inactivo']),
-        check('slogan', 'slogan es requerido').not().isEmpty()
+        check('nombre', 'nombre.requerido').not().isEmpty(),
+        check('estado', 'estado.requerido').isIn(['activo', 'inactivo']),
+        check('slogan', 'slogan.requerido').not().isEmpty()
     ],
-
-    async function (req, res) {
+    async function(req, res) {
         try {
-            let moduloProductora = new ModuloProductora.findById(req.params.ModuloProductoraID);
+            let moduloProductora = await ModuloProductora.findById(req.params.moduloProductoraId);
 
-            if(!moduloProductora){
-                return res.send('no existe este productor')
+            if (!moduloProductora) {
+                return res.status(404).send('Módulo Productora no existe');
             }
 
             const errors = validationResult(req);
-            if(!errors.isEmpty()){
-                return res.status(400).json({message : errors.array()})
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ message: errors.array() });
             }
 
-                moduloProductora.nombre = req.body.nombre;
-                moduloProductora.estado = req.body.estado;
-                moduloProductora.fechaActualizacion = new Date();
-                moduloProductora.slogan = req.body.slogan;
-                moduloProductora.descripcion = req.body.descripcion;
+            moduloProductora.nombre = req.body.nombre;
+            moduloProductora.estado = req.body.estado;
+            moduloProductora.slogan = req.body.slogan;
+            moduloProductora.descripcion = req.body.descripcion;
+            moduloProductora.fechaActualizacion = new Date();
+            moduloProductora = await moduloProductora.save();
+            
+            res.send(moduloProductora);
 
-                moduloProductora = await moduloProductora.save();
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Ha ocurrido un error');
+        }
+    }
+);
 
-                res.send(moduloProductora);
-            }
-            catch(error){
-                console.log(error);
-                res.status(500).send('ocurrio un error')
-            }
-});
 
 //GET
 router.get('/', async function (req, res) {
