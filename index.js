@@ -2,10 +2,13 @@ const express = require('express')
 const { getConnection } = require('./db/db-connection-mongo');
 const app = express()
 const port = 4000
+const cors = require ('cors')
 
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
 
 getConnection();
 
