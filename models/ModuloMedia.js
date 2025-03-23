@@ -16,7 +16,7 @@ const ModuloMediaSchema = Schema({
     },
     url: {
         type: String,
-        required: true,
+        required: false,
         unique: true
     },
     imagenPortada: {
@@ -25,11 +25,11 @@ const ModuloMediaSchema = Schema({
     },
     fechaCreacion: {
         type: Date,
-        required: true
+        required: false
     },
     fechaActualizacion: {
         type: Date,
-        required: true
+        required: false
     },
     añoEstreno: {
         type: Number,
