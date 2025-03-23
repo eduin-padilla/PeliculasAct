@@ -57,27 +57,27 @@ const ModuloMediaSchema = Schema({
     tipo: {
         type: Schema.Types.String,
         ref: 'Tipo',
-        required: true
+        required: true,
     },
     moduloDirector: {
         type: Schema.Types.String,
         ref: 'ModuloDirector',
-        required:true
+        required:false,
     },
     moduloGenero:{
         type: Schema.Types.String,
         ref: 'ModuloGenero',
-        required: true
+        required: false,
     },
     moduloProductora:{
         type: Schema.Types.String,
         ref: 'ModuloProductora',
-        required: true
+        required: false,
     },
     moduloTipo:{
         type: Schema.Types.String,
         ref: 'ModuloTipo',
-        required: true
+        required: false,
     }
 });
 
