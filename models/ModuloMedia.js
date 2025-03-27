@@ -12,70 +12,70 @@ const ModuloMediaSchema = Schema({
     },
     sinopsis: {
         type: String,
-        required: true
+        required: true,
     },
     url: {
         type: String,
-        required: false,
-        unique: true
+        required: true,
+        unique: true,
     },
     imagenPortada: {
         type: String,
-        required: true
+        required: true,
     },
     fechaCreacion: {
         type: Date,
-        required: false
+        required: false,
     },
     fechaActualizacion: {
         type: Date,
-        required: false
+        required: false,
     },
     añoEstreno: {
         type: Number,
-        required: true
+        required: true,
     },
     
     genero: {
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'Genero',
         required: true,
     
     },
     director: {
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'Director',
         required: true,
         
     },
     productora: {
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'Productora',
         required: true,
         
     },
     tipo: {
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'Tipo',
         required: true,
     },
     moduloDirector: {
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'ModuloDirector',
-        required:false,
+        required: false,
     },
     moduloGenero:{
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'ModuloGenero',
         required: false,
     },
     moduloProductora:{
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'ModuloProductora',
         required: false,
     },
     moduloTipo:{
-        type: Schema.Types.String,
+        type: Schema.Types.ObjectId,
         ref: 'ModuloTipo',
         required: false,
     }
