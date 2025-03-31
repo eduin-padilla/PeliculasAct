@@ -4,7 +4,7 @@ const ModuloMedia = require('../models/ModuloMedia');
 
 const router = Router();
 
-//POST
+
 router.post('/',
     [
         check('serial', 'El serial es requerido y debe ser único').not().isEmpty(),
@@ -17,10 +17,10 @@ router.post('/',
         check('director', 'El director es requerido').not().isEmpty(),
         check('productora', 'La productora es requerida').not().isEmpty(),
         check('tipo', 'El tipo es requerido').not().isEmpty(),
-        check('moduloDirector', 'El módulo director es requerido').optional().isEmpty(),
-        check('moduloGenero', 'El módulo género es requerido').optional().isEmpty(),
-        check('moduloProductora', 'El módulo productora es requerido').optional().isEmpty(),
-        check('moduloTipo', 'El módulo tipo es requerido').optional().isEmpty()
+        check('moduloDirector', 'El módulo director es requerido').not().isEmpty(),
+        check('moduloGenero', 'El módulo género es requerido').not().isEmpty(),
+        check('moduloProductora', 'El módulo productora es requerido').not().isEmpty(),
+        check('moduloTipo', 'El módulo tipo es requerido').not().isEmpty()
     ],
     async function (req, res) {
         try {
@@ -56,7 +56,7 @@ router.post('/',
     }
 );
 
-//PUT
+
 router.put('/:moduloMediaId',
     [
         check('serial', 'El serial es requerido y debe ser único').not().isEmpty(),
@@ -111,7 +111,7 @@ router.put('/:moduloMediaId',
     }
 );
 
-//GET
+
 router.get('/', async function (req, res) {
     try {
         const media = await ModuloMedia.find();
@@ -136,7 +136,7 @@ router.get('/:moduloMediaId', async function (req, res) {
     }
 });
 
-//DELETE
+
 router.delete('/:moduloMediaId', async function (req, res) {
     try {
         const media = await ModuloMedia.findByIdAndDelete(req.params.moduloMediaId);
