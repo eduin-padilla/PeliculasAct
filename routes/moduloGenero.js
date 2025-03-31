@@ -88,20 +88,22 @@ router.get('/', async function (req, res) {
 });
 
 //DELETE
-router.delete('/', async function (req, res) {
+// DELETE por ID
+router.delete('/:id', async function (req, res) {
     try {
-        const { nombre } = req.body; // Se recibe el nombre desde el body
-        if (!nombre) return res.status(400).send('El nombre es requerido');
+        const { id } = req.params; // Se recibe el id desde la URL
+        if (!id) return res.status(400).send('El ID es requerido');
 
-        const genero = await ModuloGenero.findOneAndDelete({ nombre });
-        if (!genero) return res.status(404).send('Genero no encontrado');
+        const genero = await ModuloGenero.findByIdAndDelete(id);
+        if (!genero) return res.status(404).send('Género no encontrado');
 
-        res.send('Genero eliminado');
+        res.send({ message: 'Género eliminado correctamente' });
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Ocurrió un error al eliminar el Genero');
+        console.error(error);
+        res.status(500).send('Ocurrió un error al eliminar el Género');
     }
 });
+
 
 
 module.exports = router;

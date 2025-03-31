@@ -19,6 +19,8 @@ const ModuloTipoSchema = Schema ({
         required: false
     }
 
+
+
 });
 
 module.exports = model(`ModuloTipo`, ModuloTipoSchema);
